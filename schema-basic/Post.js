@@ -9,6 +9,7 @@ import {
 import User from './User'
 import Comment from './Comment'
 import Authored from './Authored'
+import StatsConnection from "./StatsConnection";
 
 export default new GraphQLObjectType({
   description: 'A post from a user',
@@ -64,6 +65,7 @@ export default new GraphQLObjectType({
     createdAt: {
       type: GraphQLString,
       sqlColumn: 'created_at'
-    }
+    },
+    stats: new StatsConnection('post_id', 'id')
   })
 })

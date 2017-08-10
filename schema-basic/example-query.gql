@@ -1,22 +1,16 @@
 {
   users {
-    ...UserInfo
+    id
+    stats(from: "2016-01-01", to: "2017-08-02") {
+      comments
+      likes
+    }
     posts {
-      id
       body
-      comments {
-        body
-        author {
-          ... UserInfo
-          following {
-            id
-          }
-        }
+      stats(from: "2016-01-01", to: "2017-08-02") {
+        comments
+        likes
       }
     }
   }
-}
-
-fragment UserInfo on User {
-  id, fullName, email
 }

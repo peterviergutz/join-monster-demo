@@ -23,6 +23,10 @@ export default new GraphQLObjectType({
     users: {
       type: new GraphQLList(User),
       resolve: (parent, args, context, resolveInfo) => {
+
+        // initialize context.groupBy so it can be filled in StatsConnection
+        context.groupBy = [];
+
         // joinMonster with handle batching all the data fetching for the users and it's children. Determines everything it needs to from the "resolveInfo", which includes the parsed GraphQL query AST and your schema definition
         return joinMonster(resolveInfo, context, sql => dbCall(sql, knex, context))
       }

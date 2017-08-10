@@ -10,6 +10,7 @@ import knex from './database'
 import Comment from './Comment'
 import Post from './Post'
 import Authored from './Authored'
+import StatsConnection from "./StatsConnection";
 
 const User = new GraphQLObjectType({
   description: 'a stem contract account',
@@ -103,7 +104,8 @@ const User = new GraphQLObjectType({
       type: new GraphQLList(Authored),
       orderBy: 'id',
       sqlJoin: (userTable, unionTable) => `${userTable}.id = ${unionTable}.author_id`
-    }
+    },
+    stats: new StatsConnection('author_id', 'id')
   })
 })
 
